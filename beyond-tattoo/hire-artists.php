@@ -20,6 +20,7 @@ $jobsFile = DATA_DIR . '/artist-opportunities.json';
 $jobs = json_read($jobsFile);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    bt_require_csrf();
     $action = (string)($_POST['action'] ?? '');
     if ($action === 'post_job') {
         $title = trim((string)($_POST['title'] ?? ''));

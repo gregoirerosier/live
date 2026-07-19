@@ -1,48 +1,12 @@
 <?php
+declare(strict_types=1);
 require __DIR__.'/bootstrap.php';
 require dirname(__DIR__).'/_header.php';
+$tabs=['content'=>['DailyBreath Content','dailybreath-content.php'],'breath'=>['DailyBreath Generator','breath-generator.php'],'french'=>['Beyond French Generator','french-generator.php'],'french-options'=>['Beyond French Options','french-options.php'],'voices'=>['Premium Voices','voice-settings.php']];
 ?>
-<link rel="stylesheet" href="/server/admin/daily-studio/studio.css">
-<div class="studio-head"><div><h1>Beyond Studio</h1><p class="muted">Create and manage Daily Breath and Beyond French content.</p></div></div>
-<section class="studio-launch" aria-labelledby="studio-launch-title">
-  <div class="studio-launch-head">
-    <div>
-      <p class="studio-eyebrow">Create</p>
-      <h2 id="studio-launch-title">Studio tools</h2>
-    </div>
-    <p>Choose a generator to start creating.</p>
-  </div>
-  <div class="studio-tools" aria-label="Content generators">
-    <a class="studio-tool studio-tool-breath" href="/server/admin/daily-studio/dailybreath-content.php">
-      <span class="studio-tool-icon" aria-hidden="true">✦</span>
-      <span class="studio-tool-copy"><strong>DailyBreath App Content</strong><small>Edit today’s verse, generate devotionals and challenges, and build Academy lessons</small></span>
-      <span class="studio-tool-arrow" aria-hidden="true">→</span>
-    </a>
-    <a class="studio-tool studio-tool-breath" href="/server/admin/daily-studio/breath-generator.php">
-      <span class="studio-tool-icon" aria-hidden="true">🙏</span>
-      <span class="studio-tool-copy"><strong>Daily Breath Generator</strong><small>Create Bible verse posts, narration and exports</small></span>
-      <span class="studio-tool-arrow" aria-hidden="true">→</span>
-    </a>
-    <a class="studio-tool studio-tool-french" href="/server/admin/daily-studio/french-generator.php">
-      <span class="studio-tool-icon" aria-hidden="true">🇫🇷</span>
-      <span class="studio-tool-copy"><strong>Beyond French Generator</strong><small>Create Français du Jour visuals and MP3 audio</small></span>
-      <span class="studio-tool-arrow" aria-hidden="true">→</span>
-    </a>
-    <a class="studio-tool studio-tool-tattoo" href="/server/admin/daily-studio/tattoo-generator.php">
-      <span class="studio-tool-icon" aria-hidden="true">✒️</span>
-      <span class="studio-tool-copy"><strong>Stencil Library Manager</strong><small>Upload finished stencil packs, assign collections and publish the daily release</small></span>
-      <span class="studio-tool-arrow" aria-hidden="true">→</span>
-    </a>
-    <a class="studio-tool studio-tool-tattoo" href="/admin/stencil-pack-generator.php">
-      <span class="studio-tool-icon" aria-hidden="true">🎬</span>
-      <span class="studio-tool-copy"><strong>Stencil Pack Generator</strong><small>Upload a stencil, fill out the collection information and export the finished package</small></span>
-      <span class="studio-tool-arrow" aria-hidden="true">→</span>
-    </a>
-    <a class="studio-tool studio-tool-voices" href="/server/admin/daily-studio/voice-settings.php">
-      <span class="studio-tool-icon" aria-hidden="true">🎙️</span>
-      <span class="studio-tool-copy"><strong>Premium Voices</strong><small>Manage provider, API key and voice IDs</small></span>
-      <span class="studio-tool-arrow" aria-hidden="true">→</span>
-    </a>
-  </div>
-</section>
+<link rel="stylesheet" href="/server/admin/daily-studio/studio.css"><link rel="stylesheet" href="/server/admin/daily-studio/studio-sunset.css">
+<div class="studio-workspace"><div class="studio-head"><div><p class="studio-eyebrow">Sunset workspace</p><h1>Beyond Studio</h1><p class="muted">Create, configure, preview, and publish DailyBreath and Beyond French content in one place.</p></div><a class="btn" id="open-studio-page" href="dailybreath-content.php" target="_blank" rel="noopener">Open page ↗</a></div>
+<nav class="studio-tabs" role="tablist" aria-label="Studio pages"><?php foreach($tabs as $key=>[$label,$url]): ?><button type="button" role="tab" data-studio-tab="<?=DailyStudio::esc($key)?>" data-src="<?=DailyStudio::esc($url)?>" aria-selected="false"><?=DailyStudio::esc($label)?></button><?php endforeach;?></nav>
+<div class="studio-frame-shell"><iframe id="studio-frame" title="Studio page" loading="eager"></iframe></div></div>
+<script>(function(){const buttons=[...document.querySelectorAll('[data-studio-tab]')],frame=document.getElementById('studio-frame'),open=document.getElementById('open-studio-page');function select(key){const button=buttons.find(item=>item.dataset.studioTab===key)||buttons[0];buttons.forEach(item=>{const active=item===button;item.setAttribute('aria-selected',active?'true':'false');item.classList.toggle('active',active);});frame.src=button.dataset.src;open.href=button.dataset.src;try{localStorage.setItem('beyond-studio-tab',button.dataset.studioTab)}catch(e){}}let initial='content';try{initial=localStorage.getItem('beyond-studio-tab')||'content'}catch(e){}buttons.forEach(button=>button.addEventListener('click',()=>select(button.dataset.studioTab)));select(initial);})();</script>
 <?php require dirname(__DIR__).'/_footer.php'; ?>

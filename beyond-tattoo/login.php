@@ -4,6 +4,7 @@ require_once __DIR__ . '/includes/stencil-content.php';
 $stencilDay = bt_stencil_content();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    bt_require_csrf();
     $email = strtolower(trim((string)($_POST['email'] ?? '')));
     $password = (string)($_POST['password'] ?? '');
 
@@ -46,6 +47,7 @@ require __DIR__ . '/includes/header.php';
       <?php endif; ?>
 
       <form class="tattoo-login-form" method="post">
+        <input type="hidden" name="_csrf" value="<?= e(bt_csrf_token()) ?>">
         <label>
           <span>Email</span>
           <input class="input" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>

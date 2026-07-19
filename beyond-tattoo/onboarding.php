@@ -11,6 +11,7 @@ foreach ($users as $i => $candidate) {
 $role = (string)($user['role'] ?? $_SESSION['user_role'] ?? 'client');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $userIndex !== null) {
+    bt_require_csrf();
     $profile = [
         'city' => trim((string)($_POST['city'] ?? '')),
         'bio' => trim((string)($_POST['bio'] ?? '')),
@@ -35,6 +36,7 @@ require __DIR__ . '/includes/header.php';
     <h1>Make your profile useful from day one.</h1>
     <p class="small">These details power recommendations, studio matches and hiring.</p>
     <form class="form-grid" method="post">
+      <input type="hidden" name="_csrf" value="<?= e(bt_csrf_token()) ?>">
       <input class="input" name="city" placeholder="City or service area" required>
       <?php if ($role === 'artist'): ?>
         <input class="input" name="styles" placeholder="Styles — realism, fine line, blackwork…" required>

@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: index.php');
     exit;
 }
+beyond_require_csrf();
 
 if (!empty($_POST['website'] ?? '')) {
     $redirect('success');

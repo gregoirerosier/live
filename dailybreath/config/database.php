@@ -1,4 +1,5 @@
 <?php
+require_once dirname(__DIR__, 2) . '/config/security.php';
 // DailyBreath Newsletter Database Config
 // Update these values with your hosting MySQL credentials.
 

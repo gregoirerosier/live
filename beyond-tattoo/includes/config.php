@@ -1,18 +1,16 @@
 <?php
 declare(strict_types=1);
+require_once dirname(__DIR__, 2) . '/config/bootstrap.php';
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
+ini_set('display_errors', '0');
+ini_set('display_startup_errors', '0');
 error_reporting(E_ALL);
-
-if (session_status() !== PHP_SESSION_ACTIVE) {
-    session_start();
-}
 
 define('APP_NAME', 'Beyond Tattoo');
 define('APP_ROOT', dirname(__DIR__));
 define('DATA_DIR', APP_ROOT . '/data');
-define('UPLOAD_DIR', APP_ROOT . '/uploads/healing');
+define('UPLOAD_DIR', beyond_private_root() . '/uploads/beyond-tattoo/healing');
+define('HEALING_DATA_FILE', beyond_private_root() . '/data/beyond-tattoo-healing.json');
 
 if (!function_exists('e')) {
     function e($value): string {
@@ -57,7 +55,13 @@ function require_login(): void {
     if (!is_logged_in()) {
         redirect('login.php');
     }
+    if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+        bt_require_csrf();
+    }
 }
+
+function bt_csrf_token(): string { return beyond_csrf_token(); }
+function bt_require_csrf(): void { beyond_require_csrf(); }
 
 function current_user_email(): string {
     return (string)($_SESSION['user_email'] ?? '');

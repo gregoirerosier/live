@@ -2,6 +2,7 @@
 require __DIR__ . '/includes/config.php';
 require_login();
 if ($_SERVER['REQUEST_METHOD']==='POST') {
+  bt_require_csrf();
   $file=DATA_DIR.'/tattoos.json';
   $tattoos=json_read($file);
   $tattoos[]=[
@@ -24,6 +25,7 @@ require __DIR__ . '/includes/header.php';
 ?>
 <div class="auth-wrap"><div class="auth-card"><a class="brand" href="dashboard.php"><span class="brand-badge">B</span><span>Add Tattoo</span></a><h1>Start a new journey</h1>
 <form class="form-grid" method="post">
+<input type="hidden" name="_csrf" value="<?= e(bt_csrf_token()) ?>">
 <input class="input" name="name" placeholder="Tattoo name" required>
 <input class="input" name="artist" placeholder="Artist">
 <input class="input" name="studio" placeholder="Studio">

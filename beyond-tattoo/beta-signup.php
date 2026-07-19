@@ -4,6 +4,7 @@ require __DIR__ . '/includes/config.php';
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirect('index.php#beta');
 }
+bt_require_csrf();
 
 $name = trim((string)($_POST['name'] ?? ''));
 $email = strtolower(trim((string)($_POST['email'] ?? '')));

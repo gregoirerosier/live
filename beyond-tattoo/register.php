@@ -6,6 +6,7 @@ $selectedRole = (string)($_GET['role'] ?? $_POST['role'] ?? 'client');
 if (!in_array($selectedRole, $allowedRoles, true)) $selectedRole = 'client';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    bt_require_csrf();
     $name = trim((string)($_POST['name'] ?? ''));
     $email = strtolower(trim((string)($_POST['email'] ?? '')));
     $password = (string)($_POST['password'] ?? '');
@@ -51,6 +52,7 @@ require __DIR__ . '/includes/header.php';
     <p class="small">Choose your main account type. You can connect with the other sides of the marketplace later.</p>
     <?php if (isset($error)): ?><div class="notice error-notice"><?= e($error) ?></div><?php endif; ?>
     <form class="form-grid" method="post">
+      <input type="hidden" name="_csrf" value="<?= e(bt_csrf_token()) ?>">
       <div class="role-picker">
         <label class="role-option <?= $selectedRole === 'client' ? 'selected' : '' ?>">
           <input type="radio" name="role" value="client" <?= $selectedRole === 'client' ? 'checked' : '' ?>>

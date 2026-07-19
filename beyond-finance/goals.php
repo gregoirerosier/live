@@ -1,1 +1,0 @@
-<?php require_once __DIR__.'/../includes/app-layout.php'; $wallet=bos_page_start('Beyond Finance','Savings Goals','Beyond Finance 2.1 Beta'); ?><main class="bos-main"><section class="bos-hero"><span class="bos-kicker">Beyond Finance</span><h1>Savings Goals</h1><p>Secure personal finance tracking connected to Beyond ID.</p></section></main><?php bos_page_end(); ?>

@@ -1,5 +1,7 @@
 <?php
+require_once __DIR__ . '/../config/security.php';
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') { header('Location: index.php'); exit; }
+beyond_require_csrf();
 $name = trim($_POST['name'] ?? ''); $email = trim($_POST['email'] ?? '');
 if ($name === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) { header('Location: index.php?joined=0'); exit; }
 $file = __DIR__ . '/data/beta-signups.json';

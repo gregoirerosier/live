@@ -12,6 +12,7 @@ if ($view === false) {
     http_response_code(500);
     exit('Daily Breath generator view is unavailable.');
 }
+$view = str_replace('</head>', '<link rel="stylesheet" href="/server/admin/daily-studio/studio-sunset.css"></head>', $view);
 
 echo str_replace(
     'content="__CSRF_TOKEN__"',

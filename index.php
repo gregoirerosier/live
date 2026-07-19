@@ -56,7 +56,7 @@ if (is_file($frenchLessonsPath)) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem('beyond-theme')==='light'?'light':'dark';}catch(e){document.documentElement.dataset.theme='dark';}})();</script>
+<script>(function(){try{const t=localStorage.getItem('beyond-theme');document.documentElement.dataset.theme=['dark','light','sunset'].includes(t)?t:'sunset';}catch(e){document.documentElement.dataset.theme='sunset';}})();</script>
 <meta name="theme-color" content="#050817">
 <link rel="icon" type="image/webp" href="assets/icons/beyond-os-192.webp">
 <link rel="apple-touch-icon" href="assets/icons/beyond-os.webp">
