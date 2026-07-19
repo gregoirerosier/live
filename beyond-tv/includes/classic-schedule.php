@@ -9,12 +9,6 @@ declare(strict_types=1);
 function beyond_classic_libraries(): array
 {
     return [
-        'looney-tunes' => [
-            'name' => 'Looney Tunes', 'icon' => '🐰', 'episode_count' => 1,
-            'sources' => [
-                ['type'=>'video','id'=>'KUwZP4dA6MU','label'=>'Looney Tunes compilation','start'=>3],
-            ],
-        ],
         'popeye' => [
             'name' => 'Popeye', 'icon' => '💪', 'episode_count' => 1,
             'sources' => [
@@ -53,10 +47,9 @@ function beyond_classic_libraries(): array
             ],
         ],
         'mario' => [
-            'name' => 'Channel 1 Classics', 'icon' => '🎞️', 'episode_count' => 2,
+            'name' => 'Channel 1 Classics', 'icon' => '🎞️', 'episode_count' => 1,
             'sources' => [
-                ['type'=>'video','id'=>'KUwZP4dA6MU','label'=>'Channel 1 classic fallback','start'=>3],
-                ['type'=>'video','id'=>'nSdz5ln2rME','label'=>'Channel 1 secondary fallback','start'=>0],
+                ['type'=>'video','id'=>'nSdz5ln2rME','label'=>'Channel 1 classic fallback','start'=>0],
             ],
         ],
     ];
@@ -67,7 +60,7 @@ function beyond_classic_blocks(): array
     return [
         ['start'=>0,  'end'=>3,  'library'=>'batman',      'title'=>'Batman After Dark'],
         ['start'=>3,  'end'=>6,  'library'=>'popeye',      'title'=>'Popeye Classics'],
-        ['start'=>6,  'end'=>9,  'library'=>'looney-tunes','title'=>'Looney Tunes Morning'],
+        ['start'=>6,  'end'=>9,  'library'=>'popeye',      'title'=>'Morning Cartoon Classics'],
         ['start'=>9,  'end'=>12, 'library'=>'spider-man',  'title'=>'Spider-Man Classics'],
         ['start'=>12, 'end'=>15, 'library'=>'lucky-luke',  'title'=>'Lucky Luke'],
         ['start'=>15, 'end'=>18, 'library'=>'x-men',       'title'=>'X-Men Animated'],
