@@ -93,6 +93,7 @@
         <button class="btn primary" id="downloadPng" type="button">Download PNG</button><button class="btn secondary" id="exportMp3" type="button">Download MP3</button>
         <button class="btn secondary" id="saveDraft" type="button">Save draft</button>
         <button class="btn primary wide" id="exportVideo" type="button">Export narrated MP4</button>
+        <button class="btn secondary wide" id="exportAllVideo" type="button">Export all languages as one narrated MP4</button>
       </div>
       <div id="status" class="status" role="status" aria-live="polite"></div>
       <div class="hint">MP4 is used when supported by the browser. Otherwise a high-quality WebM is exported.</div>
@@ -237,6 +238,26 @@
       const mime=recorder.mimeType||type||'video/webm';const isMp4=mime.includes('mp4');downloadBlob(new Blob(chunks,{type:mime}),safeName()+(isMp4?'.mp4':'.webm'));status(isMp4?'Narrated MP4 exported.':'This browser exported WebM because MP4 recording is unavailable.');
     }catch(error){status(error.message||'Video export failed.',true)}finally{if(objectUrl)URL.revokeObjectURL(objectUrl);if(audioContext)audioContext.close();button.disabled=false}
   }
+  async function exportAllLanguagesVideo(){
+    if(!window.MediaRecorder||!canvas.captureStream){status('Batch video export is not supported by this browser.',true);return}
+    const button=$('exportAllVideo'),originalVerseLanguage=verseLanguage(),originalNarration=narrationLocale(),originalFields={};['heading','verse','reference','translation','footer','locale','publishDate'].forEach(id=>{originalFields[id]=$(id).value});button.disabled=true;stopNarration();
+    const languages=[['en','en-US','English'],['fr','fr-FR','French'],['es','es-ES','Spanish'],['jm','en-JM','Patois'],['ht','ht-HT','Kreyòl']];
+    const referenceMatch=value('reference').match(/^(.*?)\s+(\d+):(\d+)/);let audioContext=null,running=true,recorder=null;
+    try{
+      status('Preparing the five-language narrated video…');
+      const stream=canvas.captureStream(30);audioContext=new (window.AudioContext||window.webkitAudioContext)();await audioContext.resume();const destination=audioContext.createMediaStreamDestination();destination.stream.getAudioTracks().forEach(track=>stream.addTrack(track));
+      const type=recorderType(),chunks=[];recorder=new MediaRecorder(stream,type?{mimeType:type,videobit$PerSecond:6500000}:undefined);recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};const done=new Promise((resolve,reject)=>{recorder.onstop=resolve;recorder.onerror=()=>reject(recorder.error||new Error('Batch video export failed.'))});
+      const started=performance.now();const animate=now=>{if(!running)return;draw((Math.sin((now-started)/420)+1)/2);requestAnimationFrame(animate)};requestAnimationFrame(animate);recorder.start(250);
+      for(let index=0;index<languages.length;index++){
+        const [language,locale,label]=languages[index],textRadio=document.querySelector(`input[name="verseLanguage"][value="${language}"]`),voiceRadio=document.querySelector(`input[name="narrationLanguage"][value="${locale}"]`);if(textRadio)textRadio.checked=true;if(voiceRadio)voiceRadio.checked=true;$('locale').value=languageSettings[language].locale;$('heading').value=languageSettings[language].heading;
+        if(referenceMatch){const query=new URLSearchParams({type:'bible',language,book:referenceMatch[1],chapter:referenceMatch[2],verse:referenceMatch[3]});const response=await fetch(`/server/admin/daily-studio/api/random-content.php?${query}`,{cache:'no-store'});const data=await response.json();if(response.ok&&data.item)applyVerseItem(data.item)}
+        draw();status(`Recording ${label} narration (${index+1} of ${languages.length})…`);
+        const response=await fetch('/beyond-id/admin/api/verse-narration.php',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':csrf},body:JSON.stringify({text:narrationText(),locale})});if(!response.ok)throw new Error(`${label} narration could not be generated.`);const blob=await response.blob(),url=URL.createObjectURL(blob),audio=new Audio(url);audio.preload='auto';await new Promise((resolve,reject)=>{audio.onloadedmetadata=resolve;audio.onerror=()=>reject(new Error(`${label} audio could not be loaded.`))});const source=audioContext.createMediaElementSource(audio);source.connect(destination);await audio.play();await new Promise(resolve=>{const timeout=setTimeout(resolve,Math.min(91000,Math.max(5000,(Number.isFinite(audio.duration)?audio.duration*1000+700:10000))));audio.onended=()=>{clearTimeout(timeout);resolve()}});source.disconnect();URL.revokeObjectURL(url);await new Promise(resolve=>setTimeout(resolve,500));
+      }
+      running=false;recorder.stop();await done;const mime=recorder.mimeType||type||'video/webm',mp4=mime.includes('mp4');downloadBlob(new Blob(chunks,{type:mime}),`${safeName()}-all-languages${mp4?'.mp4':'.webm'}`);status(mp4?'All narrated languages exported as one MP4.':'All narrated languages exported as one WebM because this browser cannot record MP4.');
+    }catch(error){running=false;if(recorder&&recorder.state!=='inactive')recorder.stop();status(error.message||'Batch video export failed.',true)}finally{Object.entries(originalFields).forEach(([id,value])=>{$(id).value=value});const textRadio=document.querySelector(`input[name="verseLanguage"][value="${originalVerseLanguage}"]`),voiceRadio=document.querySelector(`input[name="narrationLanguage"][value="${originalNarration}"]`);if(textRadio)textRadio.checked=true;if(voiceRadio)voiceRadio.checked=true;if(audioContext)await audioContext.close().catch(()=>{});draw();button.disabled=false}
+  }
+
   async function saveDraft(){
     const d=dateInfo();status('Saving draft…');try{const response=await fetch('/beyond-id/admin/api/verse-posts.php',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':csrf},body:JSON.stringify({publish_date:d.raw,locale:verseLanguage(),translation_code:value('translation'),heading:value('heading'),verse_text:value('verse'),scripture_reference:value('reference'),weekday_label:d.weekday,date_label:`${d.month} ${d.day}`,footer_message:value('footer'),template_style:style(),show_footer:$('showFooter').checked,show_frame:$('showFrame').checked})});const data=await response.json();if(!response.ok)throw new Error(data.error||'Draft could not be saved.');status(`Draft #${data.id} saved.`)}catch(error){status(error.message,true)}}
 
@@ -269,7 +290,7 @@
   $('verseBook').addEventListener('change',populateChapters);$('verseChapter').addEventListener('change',populateVerseNumbers);$('loadSelectedVerse').addEventListener('click',loadSelectedVerse);
 
   controls.forEach(control=>{control.addEventListener(control.type==='file'?'change':'input',draw);control.addEventListener('change',draw)});
-  $('downloadPng').addEventListener('click',downloadPng);$('saveDraft').addEventListener('click',saveDraft);$('previewAudio').addEventListener('click',previewNarration);$('stopAudio').addEventListener('click',()=>{stopNarration();status('Narration stopped.')});$('exportVideo').addEventListener('click',exportVideo);$('exportMp3').addEventListener('click',exportMp3);$('generateTodayVerse').addEventListener('click',generateTodayVerse);
+  $('downloadPng').addEventListener('click',downloadPng);$('saveDraft').addEventListener('click',saveDraft);$('previewAudio').addEventListener('click',previewNarration);$('stopAudio').addEventListener('click',()=>{stopNarration();status('Narration stopped.')});$('exportVideo').addEventListener('click',exportVideo);$('exportAllVideo').addEventListener('click',exportAllLanguagesVideo);$('exportMp3').addEventListener('click',exportMp3);$('generateTodayVerse').addEventListener('click',generateTodayVerse);
   forest.onload=draw;botanical.onload=draw;loadVerseCatalog();draw();
 })();
 </script>

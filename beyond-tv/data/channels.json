@@ -6,17 +6,19 @@
     "icon": "🎞️",
     "now": "Library-driven daily rotation",
     "up_next": "Next confirmed classic",
-    "description": "Beyond TV’s synchronized classic-cartoon and superhero channel. Each programme block advances its confirmed YouTube library and automatically falls back when a source fails.",
+    "description": "Vintage animation and weekend cartoon blocks.",
     "gradient": "linear-gradient(135deg,#230a2d,#891b59 58%,#e58c2c)",
     "progress": 18,
     "stream_endpoint": "/beyond-tv/api/classic-live.php",
     "access": "guest",
-    "category": "Classics",
+    "category": "Cartoons",
     "live": true,
     "thumbnail": "https://i.ytimg.com/vi/nSdz5ln2rME/maxresdefault.jpg",
     "release_status": "released",
     "schedule_endpoint": "/beyond-tv/api/classic-live.php",
-    "source_label": "Verified public-domain and approved official sources"
+    "source_label": "Verified public-domain and approved official sources",
+    "number": 1,
+    "featured": true
   },
   {
     "slug": "beyond-cartoons",
@@ -25,7 +27,7 @@
     "icon": "📺",
     "now": "Scheduled cartoons on Vancouver time",
     "up_next": "The next daily programming block",
-    "description": "A synchronized all-day cartoon channel spanning classic animation, Cartoon Network favourites, Disney animation, anime and late-night adventures.",
+    "description": "Anime, action cartoons, and animated comedy.",
     "gradient": "linear-gradient(135deg,#06355a,#7353ff 52%,#ff4f9a)",
     "progress": 100,
     "access": "guest",
@@ -35,41 +37,36 @@
     "release_status": "released",
     "source_type": "scheduled_youtube",
     "schedule_endpoint": "/beyond-tv/api/beyond-cartoons-live.php",
-    "source_label": "Approved YouTube embeds; playback remains hosted by YouTube"
+    "source_label": "Approved YouTube embeds; playback remains hosted by YouTube",
+    "number": 2,
+    "featured": true
   },
   {
     "slug": "bubble-guppies",
     "name": "Preschool TV",
     "short_name": "Preschool TV",
     "icon": "🐾",
-    "now": "Bluey Full Episodes",
-    "up_next": "Bubble Guppies",
-    "description": "A preschool channel featuring official Bluey and Bubble Guppies YouTube programming, learning songs and calm bedtime blocks.",
+    "now": "Bluey & Nick Jr. live library",
+    "up_next": "Next curated preschool episode",
+    "description": "Bluey and curated Nick Jr. libraries.",
     "gradient": "linear-gradient(135deg,#072b68,#08a8d8 55%,#ff66bd)",
     "progress": 12,
-    "source_type": "youtube_embed",
-    "youtube_id": "61fSXCbzF1M",
-    "official_channel": "Bluey - Official Channel",
-    "official_url": "https://www.youtube.com/@BlueyOfficialChannel",
-    "rights_status": "official_embed_only",
-    "rights_label": "Embedded from YouTube — playback remains hosted by YouTube",
+    "source_type": "archive_library_live",
+    "official_url": "https://archive.org/details/bluey-iso-archive/Bluey+DVD+ISO+Archive/",
+    "rights_status": "archive_item",
+    "rights_label": "Playback hosted by Internet Archive",
     "access": "guest",
     "category": "Preschool",
     "live": true,
     "rating": "TV-Y",
-    "youtube_start": 0,
-    "youtube_autoplay": true,
-    "youtube_muted": true,
-    "youtube_title": "2 Hours Full Episodes of Bluey",
-    "youtube_live_status": "none",
-    "youtube_playlist_id": "PLbtUQWldWkKjFcPqDd_XI3QQ_3IBqaoV7",
-    "youtube_playlist_video_id": "61fSXCbzF1M",
-    "youtube_playlist_title": "Bluey Full Episodes Collection",
     "approved_by": "admin",
     "approved_at": "2026-07-16T00:00:00-07:00",
-    "thumbnail": "https://i.ytimg.com/vi/61fSXCbzF1M/maxresdefault.jpg",
+    "thumbnail": "https://archive.org/services/img/bluey-iso-archive",
     "release_status": "released",
-    "source_label": "Official Bluey and Nick Jr. YouTube embeds; playback remains hosted by YouTube"
+    "source_label": "Internet Archive · Curated Bluey and Nick Jr. live library",
+    "stream_endpoint": "/beyond-tv/api/bluey-live.php",
+    "number": 3,
+    "featured": true
   },
   {
     "slug": "yugioh-tv",
@@ -99,7 +96,8 @@
     "youtube_muted": true,
     "source_label": "Official licensed source",
     "thumbnail": "/beyond-tv/assets/img/beyond-tv-promo.webp",
-    "release_status": "integrated"
+    "release_status": "integrated",
+    "featured": false
   },
   {
     "slug": "fairly-oddparents",
@@ -130,7 +128,8 @@
     "approved_by": "admin",
     "approved_at": "2026-07-16T00:00:00-07:00",
     "thumbnail": "https://i.ytimg.com/vi/hhUW8psQ5oc/maxresdefault.jpg",
-    "release_status": "development"
+    "release_status": "development",
+    "featured": false
   },
   {
     "slug": "teen-titans",
@@ -153,21 +152,22 @@
     "live": false,
     "rating": "TV-Y7",
     "thumbnail": "/beyond-tv/assets/img/beyond-tv-promo.webp",
-    "release_status": "development"
+    "release_status": "development",
+    "featured": false
   },
   {
     "slug": "space-tv",
-    "name": "Space TV",
+    "name": "Beyond Space",
     "short_name": "Space TV",
     "icon": "🛰️",
     "now": "This Week: The Sun & The Milky Way",
     "up_next": "Sun and Milky Way rotation",
-    "description": "This week on Beyond Space: the Sun and the Milky Way, with scheduled YouTube documentaries and cosmic visuals.",
+    "description": "Space science, NASA, and cosmic ambience.",
     "gradient": "linear-gradient(135deg,#050b25,#123d93 58%,#28a8ff)",
     "progress": 52,
     "external_url": "https://youtu.be/Yla5i5tzXKE",
     "access": "guest",
-    "category": "Space",
+    "category": "Science",
     "live": true,
     "thumbnail": "/assets/icons/beyond-space.webp",
     "release_status": "released",
@@ -178,7 +178,9 @@
     "youtube_muted": true,
     "official_channel": "YouTube",
     "official_url": "https://youtu.be/Yla5i5tzXKE",
-    "source_label": "Scheduled YouTube rotation"
+    "source_label": "Scheduled YouTube rotation",
+    "number": 4,
+    "featured": true
   },
   {
     "slug": "launch-tv",
@@ -195,7 +197,8 @@
     "category": "Space",
     "live": true,
     "thumbnail": "/assets/icons/beyond-space.webp",
-    "release_status": "development"
+    "release_status": "development",
+    "featured": false
   },
   {
     "slug": "classic-cinema",
@@ -204,7 +207,7 @@
     "icon": "🎬",
     "now": "Jeepers Creepers — Today’s Special",
     "up_next": "Sunday: six-movie marathon",
-    "description": "A scheduled movie channel with a new feature each day and a full Sunday marathon.",
+    "description": "Features, double bills, and weekend marathons.",
     "gradient": "linear-gradient(135deg,#241b08,#6f4a16 60%,#e6b94b)",
     "progress": 27,
     "access": "guest",
@@ -213,7 +216,9 @@
     "thumbnail": "/beyond-tv/assets/img/beyond-tv-promo.webp",
     "release_status": "released",
     "source_type": "scheduled_movies",
-    "source_label": "Beyond Movies weekly schedule"
+    "source_label": "Beyond Movies weekly schedule",
+    "number": 6,
+    "featured": true
   },
   {
     "slug": "midnight-movies",
@@ -231,7 +236,8 @@
     "live": true,
     "rating": "PG",
     "thumbnail": "https://archive.org/services/img/TheLittleShopOfHorrors1960_765",
-    "release_status": "development"
+    "release_status": "development",
+    "featured": false
   },
   {
     "slug": "silent-film-theater",
@@ -250,7 +256,8 @@
     "weekend": true,
     "weekend_label": "JUL 18–19",
     "thumbnail": "https://archive.org/services/img/The_General_Buster_Keaton",
-    "release_status": "development"
+    "release_status": "development",
+    "featured": false
   },
   {
     "slug": "family-movie-matinee",
@@ -269,7 +276,8 @@
     "weekend": true,
     "weekend_label": "JUL 18–19",
     "thumbnail": "https://i.ytimg.com/vi/QrnXZgFYMbk/maxresdefault.jpg",
-    "release_status": "development"
+    "release_status": "development",
+    "featured": false
   },
   {
     "slug": "cannabis-culture",
@@ -287,7 +295,8 @@
     "live": false,
     "rating": "19+",
     "thumbnail": "/assets/dailybreath-login-background.webp",
-    "release_status": "development"
+    "release_status": "development",
+    "featured": false
   },
   {
     "slug": "meditation-tv",
@@ -304,7 +313,8 @@
     "live": false,
     "external_url": "/beyond-audio/",
     "thumbnail": "/assets/dailybreath-login-background.webp",
-    "release_status": "development"
+    "release_status": "development",
+    "featured": false
   },
   {
     "slug": "kreyol-lakay",
@@ -322,7 +332,8 @@
     "live": true,
     "rights_label": "CC BY-SA / U.S. public domain",
     "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Flag_of_Haiti.svg/640px-Flag_of_Haiti.svg.png",
-    "release_status": "development"
+    "release_status": "development",
+    "featured": false
   },
   {
     "slug": "ayiti-caribbean",
@@ -340,7 +351,8 @@
     "live": true,
     "rights_label": "CC BY / CC BY-SA",
     "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Flag_of_Haiti.svg/640px-Flag_of_Haiti.svg.png",
-    "release_status": "development"
+    "release_status": "development",
+    "featured": false
   },
   {
     "slug": "cinema-francais-classique",
@@ -358,7 +370,8 @@
     "live": true,
     "rights_label": "Public domain",
     "thumbnail": "https://archive.org/services/img/Cendrillon_1899",
-    "release_status": "development"
+    "release_status": "development",
+    "featured": false
   },
   {
     "slug": "beyond-learn-junior",
@@ -372,7 +385,8 @@
     "progress": 100,
     "access": "guest",
     "category": "Kids",
-    "live": true
+    "live": true,
+    "featured": false
   },
   {
     "slug": "beyond-space",
@@ -386,7 +400,8 @@
     "progress": 100,
     "access": "guest",
     "category": "Education",
-    "live": true
+    "live": true,
+    "featured": false
   },
   {
     "slug": "beyond-ancient",
@@ -395,7 +410,7 @@
     "icon": "🏺",
     "now": "Ancient Egypt Documentary",
     "up_next": "Pyramids, pharaohs and archaeology",
-    "description": "Ancient Egypt, archaeology and civilization documentaries.",
+    "description": "Archaeology, civilizations, and ancient history.",
     "gradient": "linear-gradient(135deg,#5b3a00,#b8860b)",
     "progress": 100,
     "access": "guest",
@@ -409,7 +424,9 @@
     "official_channel": "HISTORY",
     "official_url": "https://www.youtube.com/watch?v=BR2ZMj3o5EU",
     "release_status": "released",
-    "source_label": "YouTube documentary embed"
+    "source_label": "YouTube documentary embed",
+    "number": 5,
+    "featured": true
   },
   {
     "slug": "beyond-movies",
@@ -423,7 +440,8 @@
     "progress": 100,
     "access": "guest",
     "category": "Movies",
-    "live": true
+    "live": true,
+    "featured": false
   },
   {
     "slug": "beyond-french",
@@ -432,7 +450,7 @@
     "icon": "🇫🇷",
     "now": "French Greetings for Beginners",
     "up_next": "French Essentials Lessons",
-    "description": "French learning and culture.",
+    "description": "Lessons, conversation, and French culture.",
     "gradient": "linear-gradient(135deg,#0055a4,#ffffff 50%,#ef4135)",
     "progress": 100,
     "access": "guest",
@@ -448,7 +466,9 @@
     "official_channel": "Learn French With Alexa",
     "official_url": "https://www.youtube.com/user/learnfrenchwithalexa",
     "release_status": "released",
-    "source_label": "Learn French With Alexa YouTube embed"
+    "source_label": "Learn French With Alexa YouTube embed",
+    "number": 7,
+    "featured": true
   },
   {
     "slug": "beyond-health",
@@ -457,11 +477,11 @@
     "icon": "💚",
     "now": "Featured Health Presentation",
     "up_next": "Replay and wellness rotation",
-    "description": "Featured health and wellness programming.",
+    "description": "Fitness, nutrition, meditation, and wellness.",
     "gradient": "linear-gradient(135deg,#0b6b3a,#7ccf6b)",
     "progress": 100,
     "access": "guest",
-    "category": "Health",
+    "category": "Wellness",
     "live": true,
     "source_type": "youtube_embed",
     "youtube_id": "7_chERnJ0gE",
@@ -473,6 +493,72 @@
     "official_channel": "Beyond Health",
     "official_url": "https://www.youtube.com/watch?v=7_chERnJ0gE",
     "release_status": "released",
-    "source_label": "YouTube embed"
+    "source_label": "YouTube embed",
+    "number": 8,
+    "featured": true
+  },
+  {
+    "slug": "beyond-comedy",
+    "number": 9,
+    "name": "Beyond Comedy",
+    "icon": "😂",
+    "description": "Sitcoms, teen comedy, and feel-good movies.",
+    "category": "Comedy",
+    "now": "Sister Act 2",
+    "up_next": "Bring It On",
+    "gradient": "linear-gradient(135deg,#52245f,#d05683)",
+    "access": "guest",
+    "featured": true,
+    "release_status": "released",
+    "live": true,
+    "source_label": "Curated Beyond TV library"
+  },
+  {
+    "slug": "beyond-mystery",
+    "number": 10,
+    "name": "Beyond Mystery",
+    "icon": "🔎",
+    "description": "Detectives, puzzles, thrillers, and mysteries.",
+    "category": "Mystery",
+    "now": "Mystery watchlist",
+    "up_next": "Glass Onion",
+    "gradient": "linear-gradient(135deg,#14243b,#456b8b)",
+    "access": "guest",
+    "featured": true,
+    "release_status": "released",
+    "live": true,
+    "source_label": "Curated Beyond TV library"
+  },
+  {
+    "slug": "beyond-after-dark",
+    "number": 11,
+    "name": "Beyond After Dark",
+    "icon": "🌙",
+    "description": "Goosebumps, Haunting Hour, and supernatural anthologies.",
+    "category": "Horror",
+    "now": "R. L. Stine’s The Haunting Hour",
+    "up_next": "Next supernatural story",
+    "gradient": "linear-gradient(135deg,#11131d,#50345c)",
+    "access": "guest",
+    "featured": true,
+    "release_status": "released",
+    "live": true,
+    "source_label": "Curated Beyond TV library"
+  },
+  {
+    "slug": "beyond-family",
+    "number": 12,
+    "name": "Beyond Family",
+    "icon": "✨",
+    "description": "Fantasy, storybook classics, and family adventures.",
+    "category": "Family",
+    "now": "Winnie the Pooh Storybook Classics",
+    "up_next": "The Spiderwick Chronicles",
+    "gradient": "linear-gradient(135deg,#3f3518,#b38332)",
+    "access": "guest",
+    "featured": true,
+    "release_status": "released",
+    "live": true,
+    "source_label": "Curated Beyond TV library"
   }
 ]
