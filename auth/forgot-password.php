@@ -1,0 +1,5 @@
+<?php $page_title='Forgot Password'; require_once __DIR__.'/../includes/header.php';
+if($_SERVER['REQUEST_METHOD']==='POST'){ verify_csrf(); $email=strtolower(trim($_POST['email']??'')); $stmt=db()->prepare('SELECT * FROM users WHERE email=? LIMIT 1'); $stmt->execute([$email]); $u=$stmt->fetch(); if($u){$tok=token(); db()->prepare('INSERT INTO password_resets (user_id, token, expires_at, created_at) VALUES (?,?,?,?)')->execute([$u['id'],$tok,date('Y-m-d H:i:s',time()+3600),now()]); send_app_mail($email,'Reset your Beyond ID password',"Reset your password here:\n".url('auth/reset-password.php?token='.$tok));} flash('success','If the email exists, a reset link has been sent.');}
+?>
+<section class="auth-page"><div class="card auth-card"><h1>Forgot Password</h1><form class="form" method="post"><?= csrf_field() ?><input type="email" name="email" placeholder="Email" required><button class="btn full">Send Reset Link</button></form></div></section>
+<?php require_once __DIR__.'/../includes/footer.php'; ?>

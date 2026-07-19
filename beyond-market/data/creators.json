@@ -1,0 +1,68 @@
+[
+  {
+    "slug": "maya-chen",
+    "name": "Maya Chen",
+    "role": "Tattoo artist \u00b7 Illustrator",
+    "location": "Vancouver, BC",
+    "bio": "Fine-line tattoo artist turning original ink concepts into flash, prints and apparel.",
+    "styles": [
+      "Fine line",
+      "Botanical",
+      "Minimal"
+    ],
+    "verified": true
+  },
+  {
+    "slug": "andre-lewis",
+    "name": "Andre Lewis",
+    "role": "Tattoo artist \u00b7 Digital creator",
+    "location": "Victoria, BC",
+    "bio": "Realism and lettering specialist creating art for skin, walls and screens.",
+    "styles": [
+      "Realism",
+      "Lettering",
+      "Black & grey"
+    ],
+    "verified": true
+  },
+  {
+    "slug": "nia-studio",
+    "name": "Nia Studio",
+    "role": "Independent art studio",
+    "location": "Montreal, QC",
+    "bio": "Ancient-inspired contemporary artwork, prints and collector editions.",
+    "styles": [
+      "Ancient",
+      "Editorial",
+      "Goldwork"
+    ],
+    "verified": false
+  },
+  {
+    "slug": "orbit-works",
+    "name": "Orbit Works",
+    "role": "Space art collective",
+    "location": "Online",
+    "bio": "Cosmic visual art and digital packs from the Beyond Space community.",
+    "styles": [
+      "Space",
+      "3D",
+      "Digital"
+    ],
+    "verified": true
+  },
+  {
+    "slug": "beyond-imagination-technology",
+    "name": "Beyond Imagination Technology",
+    "role": "Creative technology studio",
+    "location": "Canada",
+    "bio": "Original art, connected experiences and collectible releases created across the Beyond ecosystem.",
+    "styles": [
+      "Cosmic",
+      "Sacred art",
+      "Black & grey",
+      "Digital"
+    ],
+    "verified": true
+  }
+]

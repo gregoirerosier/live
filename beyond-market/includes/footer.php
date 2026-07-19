@@ -1,0 +1,1 @@
+<footer class="footer wrap">Beyond Market • One creator marketplace across Beyond OS.</footer><nav class="bottom"><a href="index.php"><b>⌂</b>Market</a><a href="../beyond-canvas/"><b>▧</b>Canvas</a><a href="sell.php"><b>＋</b>Sell</a><a href="../beyond-tattoo/"><b>✒</b>Tattoo</a></nav></body></html>
